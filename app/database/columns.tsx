@@ -56,7 +56,7 @@ export const columns: ColumnDef<Data>[] = [
     cell: ({ row }) => {
       const createTime = row.getValue("createTime");
       const formatted = `@${row.getValue("uniqueId")}`;
-      return <div>{formatted}</div>;
+      return <div className="font-bold">{formatted}</div>;
     },
   },
   {
