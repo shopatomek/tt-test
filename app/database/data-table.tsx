@@ -76,10 +76,10 @@ export function DataBaseTable<TData, TValue>({
       {/* INPUT */}
       <div className="flex items-center py-4">
         <Input
-          placeholder="filter by Name"
-          value={(table.getColumn("Name")?.getFilterValue() as string) || ""}
+          placeholder="filter by tags"
+          value={(table.getColumn("tags")?.getFilterValue() as string) || ""}
           onChange={(e) => {
-            table.getColumn("Name")?.setFilterValue(e.target.value);
+            table.getColumn("tags")?.setFilterValue(e.target.value);
           }}
           className="max-w-sm"
         />
@@ -140,7 +140,7 @@ export function DataBaseTable<TData, TValue>({
             })}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length? (
+            {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
