@@ -30,6 +30,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 export const columns: ColumnDef<Data>[] = [
   {
+    header: "tictokId",
+    accessorKey: "tictokId",
+  },
+  {
     header: "authorId",
     accessorKey: "authorId",
   },
