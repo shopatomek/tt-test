@@ -65,8 +65,7 @@ const handler = NextAuth({
           data: {
             name: user.name,
             image: user.image,
-            updatedAt: new Date(),
-            lastLogin: new Date(),
+            updatedAt: new Date(),          
           },
         });
       } else {
@@ -75,7 +74,7 @@ const handler = NextAuth({
             name: user.name,
             email: user.email,
             image: user.image,
-            lastLogin: new Date(),
+            updatedAt: new Date()
           },
         });
       }
