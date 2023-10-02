@@ -34,10 +34,6 @@ export const columns: ColumnDef<Data>[] = [
     accessorKey: "tiktokId",
   },
   {
-    header: "authorId",
-    accessorKey: "authorId",
-  },
-  {
     header: "createTime",
     accessorKey: "createTime",
     cell: ({ row }) => {
@@ -55,8 +51,13 @@ export const columns: ColumnDef<Data>[] = [
     accessorKey: "playCount",
   },
   {
-    header: "uniqueId",
+    header: "@uniqueId",
     accessorKey: "uniqueId",
+    cell: ({ row }) => {
+      const createTime = row.getValue("createTime");
+      const formatted = `@${row.getValue("uniqueId")}`;
+      return <div>{formatted}</div>;
+    },
   },
   {
     header: "nickname",
