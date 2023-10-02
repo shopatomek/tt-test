@@ -15,6 +15,7 @@ import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 
 // interface Data {
+// tiktokId: string;
 //   authorId: string;
 //   createTime: number;
 //   diggCount: number;
