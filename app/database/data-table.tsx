@@ -33,6 +33,7 @@ import {
   DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
 import { downloadToExcel } from "@/lib/xlsx";
+import uploadFiles from "@/lib/uploadfile";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -118,7 +119,7 @@ export function DataBaseTable<TData, TValue>({
         </DropdownMenu>
         <Button
           className="bg-red-600 hover:bg-red-500 ml-2"
-          onClick={() => downloadToExcel()}
+          onClick={() => uploadFiles()}
         >
           Upload data
         </Button>
