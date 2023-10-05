@@ -5,6 +5,10 @@ import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { FcGoogle } from "react-icons/fc";
 import Image from "next/image";
+import DataBaseTable from "@/app/database/data-table";
+import { columns } from "@/app/database/columns";
+import { data } from "@/lib/data";
+import { ThemeToggle } from "./themetoggle";
 
 const SignInButton = () => {
   const { data: session } = useSession();
@@ -20,37 +24,33 @@ const SignInButton = () => {
 
   if (session && session.user) {
     return (
-      <div className="flex gap-4 ml-auto">
-        <p className="text-neutral-600 text-sm font-bold ">
-          Welcome
-          <p className="text-neutral-400">{session.user.name}</p>
-        </p>
-        {/* <Image
-          src={session.user.image as string}
-          height={1}
-          width={50}
-          className="rounded-full h-10 w-10  border: bg-blue-700 border-3"
-          alt=""
-        /> */}
-        <Button
-          className="text-white bg-blue-600 hover:bg-blue-700 ml-auto"
-          onClick={() => signOut()}
-        >
-          <FcGoogle className="mr-2 size-2xl" />
-          Sign Out
-        </Button>
+      <div className="container ml-auto">
+        <div className="flex float-right py-3">
+          <Button
+            className="text-white bg-blue-600 hover:bg-blue-700"
+            onClick={() => signOut()}
+          >
+            <FcGoogle className="mr-2 flex text-2xl" />
+            Sign Out
+          </Button>
+        </div>
+        <DataBaseTable columns={columns} data={data} />
       </div>
     );
   }
-
   return (
-    <Button
-      className="text-white bg-blue-600 hover:bg-blue-700 ml-auto"
-      onClick={() => signIn()}
-    >
-      <FcGoogle className="mr-2 size-xl" />
-      Sign In
-    </Button>
+    <div className="flex flex-col items-center justify-center text-center">
+      <h1 className="text-3xl font-bold mb-4">Sign in to Google</h1>
+      <div className="flex items-center justify-center">
+        <Button
+          className="text-white bg-blue-600 hover:bg-blue-700"
+          onClick={() => signIn()}
+        >
+          <FcGoogle className="mr-2 flex text-2xl" />
+          Sign In
+        </Button>
+      </div>
+    </div>
   );
 };
 

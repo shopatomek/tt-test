@@ -27,7 +27,6 @@ export default function RootLayout({
           <Providers>
             <Appbar />
           </Providers>
-          <DataBaseTable columns={columns} data={data}></DataBaseTable>
         </ThemeProvider>
         {children}
       </body>

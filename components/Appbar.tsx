@@ -1,12 +1,14 @@
-import React from 'react'
-import SignInButton from './SignInButton'
+import React from "react";
+import SignInButton from "./SignInButton";
 
 const Appbar = () => {
   return (
-    <header className='flex float-right max-w-sm gap-4 p-4'>
-        <SignInButton/>
+    <header className="flex  justify-center">
+      <div className="flex justify-beetween">
+        <SignInButton />
+      </div>
     </header>
-  )
-}
+  );
+};
 
-export default Appbar
+export default Appbar;
