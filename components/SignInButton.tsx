@@ -25,7 +25,7 @@ const SignInButton = () => {
   if (session && session.user) {
     return (
       <div className="container ml-auto">
-        <div className="flex float-right py-3">
+        <div className="flex float-right py-5">
           <Button
             className="text-white bg-blue-600 hover:bg-blue-700"
             onClick={() => signOut()}

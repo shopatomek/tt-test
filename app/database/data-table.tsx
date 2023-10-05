@@ -116,6 +116,12 @@ export function DataBaseTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+        <Button
+          className="bg-red-600 hover:bg-red-500 ml-2"
+          onClick={() => downloadToExcel()}
+        >
+          Upload data
+        </Button>
       </div>
 
       {/* TABLE */}
