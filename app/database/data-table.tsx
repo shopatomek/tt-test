@@ -33,7 +33,7 @@ import {
   DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
 import { downloadToExcel } from "@/lib/xlsx";
-import uploadFiles from "@/lib/uploadfile";
+import { uploadFiles } from "@/lib/uploadfile";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -44,6 +44,15 @@ export function DataBaseTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      uploadFiles(files[0]);
+    }
+  };
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -117,9 +126,16 @@ export function DataBaseTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+        <input
+          type="file"
+          accept=".ts"
+          ref={inputRef}
+          style={{ display: "none" }}
+          onChange={handleFileChange}
+        />
         <Button
           className="bg-red-600 hover:bg-red-500 ml-2"
-          onClick={() => uploadFiles()}
+          onClick={() => inputRef.current?.click()}
         >
           Upload data
         </Button>
