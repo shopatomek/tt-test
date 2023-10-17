@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-
+import axios from "axios";
+import { signIn, signOut, useSession } from "next-auth/react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -35,6 +36,8 @@ import {
 import { downloadToExcel } from "@/lib/xlsx";
 import { uploadFiles } from "@/lib/uploadfile";
 
+
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -46,12 +49,30 @@ export function DataBaseTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files.length > 0) {
-      uploadFiles(files[0]);
+  const { data: session, status } = useSession();
+  
+  const [fileContent, setFileContent] = React.useState<string | null>(null);
+
+
+
+
+  const handleSendData = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/upload'); // Poprawna ścieżka do endpointu
+      console.log(response.data);
+    } catch (error) {
+      console.error("Błąd podczas wysyłania żądania:", error);
     }
   };
+const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const files = e.target.files;
+  if (files && files.length > 0) {
+
+    const sessionData = JSON.stringify(session) ;
+    uploadFiles(files[0], setFileContent);
+  }
+};
+
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -138,6 +159,12 @@ export function DataBaseTable<TData, TValue>({
           onClick={() => inputRef.current?.click()}
         >
           Upload data
+        </Button>
+        <Button
+          className="bg-pink-600 hover:bg-pink-500 ml-2"
+          onClick={handleSendData}
+        >
+          Send Data
         </Button>
       </div>
 

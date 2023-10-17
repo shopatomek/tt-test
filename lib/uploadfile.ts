@@ -1,10 +1,12 @@
-export function uploadFiles (file: File){
-
+export function uploadFiles(file: File, onLoad: (content: string) => void) {
   const reader = new FileReader();
   reader.readAsText(file);
   reader.onload = () => {
-    const fileContent = reader.result;
-    // Zrób co chcesz z zawartością pliku, na przykład zapisz ją w określonej ścieżce.
-    console.log(fileContent);
+    const content = reader.result as string;
+    onLoad(content); // wywołaj funkcję callback z zawartością pliku
+    console.log("sdsd", content)
   };
+
+  
 }
+

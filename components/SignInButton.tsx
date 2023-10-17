@@ -14,7 +14,7 @@ import { Dice1 } from "lucide-react";
 
 const SignInButton = () => {
   const { data: session, status } = useSession();
-
+  // console.log(JSON.stringify(session))
   const currentDate = new Date();
   const formattedDate = format(currentDate, "yyyy-MM-dd HH:mm:ss");
 
