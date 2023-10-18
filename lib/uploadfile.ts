@@ -8,3 +8,4 @@ export function uploadFiles (file: File){
     console.log(fileContent);
   };
 }
+
