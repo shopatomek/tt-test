@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-
+import { signIn, signOut, useSession } from "next-auth/react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -46,10 +46,13 @@ export function DataBaseTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
+  const { data: session, status } = useSession();
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
-      uploadFiles(files[0]);
+ 
+      const sessionData = JSON.stringify(session) ;
+      uploadFiles(files[0],sessionData);
     }
   };
 

@@ -24,6 +24,24 @@ model User {
   lastLogout     DateTime  @updatedAt
 }
 
+
+model TikTokAccount {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  tiktokId     String
+  authorId     String
+  createTime   String
+  diggCount    String
+  playCount    String
+  uniqueId     String
+  nickname     String
+  followerCount String
+  heartCount    String
+  videoCount    String
+  description   String? @map("itdescription")
+  tags          String
+  
+  @@unique([tiktokId])
+}
 model Account {
   id                String  @id @default(auto()) @map("_id") @db.ObjectId
   userId            String  @db.ObjectId
