@@ -39,6 +39,9 @@ model TikTokAccount {
   videoCount    String
   description   String? @map("itdescription")
   tags          String
+  name          String
+  email         String
+  image         String
   
   @@unique([tiktokId])
 }
