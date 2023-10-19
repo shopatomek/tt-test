@@ -128,7 +128,7 @@ export function DataBaseTable<TData, TValue>({
         </DropdownMenu>
         <input
           type="file"
-          accept=".ts"
+          accept=".json"
           ref={inputRef}
           style={{ display: "none" }}
           onChange={handleFileChange}

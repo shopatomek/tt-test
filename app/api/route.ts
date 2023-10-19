@@ -1,49 +1,36 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaClient } from '@prisma/client';
+export async function GET(request :Request){
+  return new Response ("bsfasfasfsa")
+}
 
-const prisma = new PrismaClient();
 
-export async function handleUpload(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method === 'POST') {
-    try {
-      const { fileContent } = req.body;
+  
 
-      // Zapisz fileContent do bazy danych za pomocą Prisma
-      const data = JSON.parse(fileContent);
-      await prisma.tikTokAccount.createMany({ data });
+export async function POST(request :Request){
 
-      res.status(200).json({ message: 'Upload successful' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Upload failed' });
+
+  
+  const body = await request.json()
+  console.log(body)
+
+  return new Response (JSON.stringify(body))
+
+   function uploadFiles(file: File) {
+  const reader = new FileReader();
+  reader.readAsText(file);
+  reader.onload = () => {
+    const fileContent = JSON.parse(reader.result as string); // Przetworz fileContent z reader.result;
+    console.log(fileContent)
+
+    const sendData = async()=>{
+      await fetch('/api/',{
+        method: "POST",
+        body: JSON.stringify(fileContent),
+      }
+      )
     }
-  } else if (req.method === 'GET') {
-    res.status(200).json({ message: 'GET request successful' });
-  } else {
-    res.status(405).json({ message: 'Method not allowed' });
+    sendData();
   }
+  
 }
 
-export async function handleGet(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  // Obsługa zapytania GET
 }
-
-export async function handlePost(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  // Obsługa zapytania POST
-}
-
-// Eksportuj nazwane eksporty dla każdej metody HTTP
-export default {
-  handleUpload,
-  handleGet,
-  handlePost,
-};
