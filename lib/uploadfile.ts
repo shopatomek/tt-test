@@ -1,3 +1,5 @@
+// import path from "path";
+// import fs from "fs"
 export function uploadFiles(file: File) {
   const reader = new FileReader();
   reader.readAsText(file);
