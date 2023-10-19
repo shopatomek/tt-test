@@ -7,34 +7,6 @@ export async function GET(request: Request) {
   return new Response("bsfasfasfsa");
 }
 
-// export async function POST(request: Request) {
-//   try {
-//     // Parsuj dane z pliku content
-//     const dataToInsert = content;
-
-//     // Zapisz dane w bazie za pomocą Prisma
-//     const createdData = await prisma.tiktok.create({
-//       data: dataToInsert,
-//     });
-
-//     // Zwróć odpowiedź z utworzonym rekordem w formacie JSON
-//     return new Response(JSON.stringify(createdData), {
-//       status: 201, // Kod odpowiedzi 201 - Created
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     // Zwróć odpowiedź w przypadku błędu
-//     return new Response("Wystąpił błąd podczas przetwarzania żądania", {
-//       status: 500, // Kod odpowiedzi 500 - Internal Server Error
-//     });
-//   } finally {
-//     await prisma.$disconnect();
-//   }
-// }
-
 export async function POST(request: Request) {
   try {
     // Parsuj dane z pliku content
@@ -78,21 +50,3 @@ export async function POST(request: Request) {
   }
 }
 
-// const content = require("@/lib/data");
-
-// import { PrismaClient } from "@prisma/client";
-
-// const prisma = new PrismaClient();
-
-// export async function GET(request: Request) {
-//   return new Response("bsfasfasfsa");
-// }
-
-//   export async function POST(request: Request) {
-//     const bla = content;
-//     const body = request.json();
-
-//     console.log(bla);
-//     return new Response(JSON.stringify(bla));
-
-//   }
