@@ -38,32 +38,6 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     // Parsuj dane z pliku content
-
-    // const dataToInsert = content.map((item) => ({
-    //   data: {
-    //     tiktokId: item.tiktokId,
-    //     authorId: item.authorId,
-    //     createTime: item.createTime,
-    //     diggCount: item.diggCount,
-    //     playCount: item.playCount,
-    //     uniqueId: item.uniqueId || null, // Jeśli uniqueId jest undefined, ustaw na null
-    //     nickname: item.nickname,
-    //     followerCount: item.followerCount,
-    //     heartCount: item.heartCount,
-    //     videoCount: item.videoCount,
-    //     description: item.itdescription,
-    //     tags: item.tags,
-    //     name: item.name || null, // Jeśli name jest undefined, ustaw na null
-    //     email: item.email || null, // Jeśli email jest undefined, ustaw na null
-    //     image: item.image || null, // Jeśli image jest undefined, ustaw na null
-    //   },
-    // }));
-
-    // // Zapisz dane w bazie za pomocą Prisma
-    // const createdData = await prisma.tiktok.createMany({
-    //   data: dataToInsert,
-    // });
-
     const dataToInsert = content.map((item) => ({
       tiktokId: item.tiktokId,
       authorId: item.authorId,
