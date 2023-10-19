@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { downloadToExcel } from "@/lib/xlsx";
 import { uploadFiles } from "@/lib/uploadfile";
+import { sendData } from "../api/route";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -138,6 +139,12 @@ export function DataBaseTable<TData, TValue>({
           onClick={() => inputRef.current?.click()}
         >
           Upload data
+        </Button>
+        <Button
+          className="bg-pink-600 hover:bg-pink-500 ml-2"
+          onClick={() => sendData()}
+        >
+          Send Data
         </Button>
       </div>
 
