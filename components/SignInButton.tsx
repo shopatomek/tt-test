@@ -15,6 +15,30 @@ import { Dice1 } from "lucide-react";
 const SignInButton = () => {
   const { data: session, status } = useSession();
 
+  // const handleSendData = async () => {
+  //   try {
+  //     const response = await fetch("/api/route", {
+  //       method: "POST",
+  //       // @ts-ignore
+  //       headers: {
+  //         "Content-Type": "json",
+  //         "Session-Token": session,
+  //       },
+  //       body: JSON.stringify({ sessionToken: session }),
+  //     });
+
+  //     const responseData = await response.json();
+  //     console.log(responseData);
+  //   } catch (error) {
+  //     console.error("Wystąpił błąd podczas wysyłania danych:", error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   if (status === "authenticated") {
+  //     handleSendData();
+  //   }
+  // }, [status]);
+
   const currentDate = new Date();
   const formattedDate = format(currentDate, "yyyy-MM-dd HH:mm:ss");
 

@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { downloadToExcel } from "@/lib/xlsx";
 import { uploadFiles } from "@/lib/uploadfile";
-import { sendData } from "../api/route";
+// import { sendData } from "../api/route";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -142,7 +142,9 @@ export function DataBaseTable<TData, TValue>({
         </Button>
         <Button
           className="bg-pink-600 hover:bg-pink-500 ml-2"
-          onClick={() => sendData()}
+          onClick={() => {
+            console.log("wyslij");
+          }}
         >
           Send Data
         </Button>

@@ -14,10 +14,9 @@ const handler = NextAuth({
   ],
   callbacks: {
     async signIn({ user, account }) {
-      const existingUser = await prisma.user.findUnique({
-        where: { email: user.email },
-      });
-
+     const existingUser = await prisma.user.findUnique({
+    where: { email: user.email },
+    });
       if (existingUser) {
         await prisma.user.update({
           where: { id: existingUser.id },

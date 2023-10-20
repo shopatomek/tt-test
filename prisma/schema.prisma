@@ -22,6 +22,7 @@ model User {
   accounts       Account[]
   lastLogin      DateTime? @updatedAt
   lastLogout     DateTime  @updatedAt
+  tiktoks        tiktok[]
 }
 
 model tiktok {
@@ -38,14 +39,13 @@ model tiktok {
   videoCount    String?
   description   String? @map("itdescription")
   tags          String?
-  name          String?
-  email         String?
-  image         String?
+  user          User    @relation(fields: [userEmail], references: [email])
+  userEmail     String
 }
 
 model Account {
   id                String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String  @db.ObjectId
+  userId            String
   type              String
   provider          String
   providerAccountId String
@@ -57,7 +57,7 @@ model Account {
   id_token          String? @db.String
   session_state     String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [email], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
