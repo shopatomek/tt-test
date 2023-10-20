@@ -20,31 +20,24 @@ export async function POST(request: Request) {
 
     const session = await getSession({ req: request });
 
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/auth/session",
+        {}
+      );
+      if (!response.ok) {
+        throw new Error("Błąd podczas wysyłania sesji do serwera");
+      }
+      const responseData = await response.json();
+      console.log(response);
+    } catch (error) {
+      console.error("Błąd podczas przetwarzania odpowiedzi JSON:", error);
+    }
+
     if (!session) {
       return new Response("Brak autoryzacji", {
         status: 401,
       });
-    }
-
-    try {
-      // @ts-ignore
-      const data = JSON.stringify(session);
-      const response = await fetch("http://localhost:3000/api/auth/session", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: data,
-      });
-
-      if (!response.ok) {
-        throw new Error("Błąd podczas wysyłania sesji do serwera");
-      }
-
-      const responseData = await response.json();
-      console.log(responseData); // Tutaj przetwarzaj odpowiedź z serwera, jeśli jest to konieczne
-    } catch (error) {
-      console.error("Błąd podczas przetwarzania odpowiedzi JSON:", error);
     }
 
     const userEmail = session.user?.email;
