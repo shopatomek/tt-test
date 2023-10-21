@@ -1,11 +1,19 @@
 import { PrismaClient } from "@prisma/client";
-import { getSession } from "next-auth/react";
 
 const prisma = new PrismaClient();
 const content = require("@/lib/datatosend");
 
-export async function GET(request: Request) {
-  return new Response(JSON.stringify({ message: "bsfasfasfsa" }), {
+// @ts-ignore
+
+export async function GET(request) {
+  // Zakładając, że Twoja aplikacja działa na localhost:3000
+  const response = await fetch("http://localhost:3000/api/auth/session");
+  const data = await response.json();
+
+  // Teraz możesz użyć wartości e-mail z odpowiedzi
+  const email = data.email || "Brak e-maila";
+
+  return new Response(JSON.stringify({ message: email }), {
     status: 200,
     headers: {
       "Content-Type": "application/json",
@@ -15,32 +23,6 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    // Parsuj dane z pliku content
-    // @ts-ignore
-
-    const session = await getSession({ req: request });
-
-    try {
-      const response = await fetch(
-        "http://localhost:3000/api/auth/session",
-        {}
-      );
-      if (!response.ok) {
-        throw new Error("Błąd podczas wysyłania sesji do serwera");
-      }
-      const responseData = await response.json();
-      console.log(response);
-    } catch (error) {
-      console.error("Błąd podczas przetwarzania odpowiedzi JSON:", error);
-    }
-
-    if (!session) {
-      return new Response("Brak autoryzacji", {
-        status: 401,
-      });
-    }
-
-    const userEmail = session.user?.email;
     const dataToInsert = content.map((item) => ({
       tiktokId: item.tiktokId,
       authorId: item.authorId,
@@ -54,7 +36,7 @@ export async function POST(request: Request) {
       videoCount: item.videoCount.toString(),
       description: item.itdescription,
       tags: item.tags,
-      userEmail: userEmail || null,
+      creator: item.email || null,
     }));
 
     const createdData = await prisma.tiktok.createMany({
@@ -63,7 +45,7 @@ export async function POST(request: Request) {
 
     // const userWithTiktoks = await prisma.user.findUnique({
     //   where: {
-    //     email: session?.user?.email,
+    //     email: "",
     //   },
     //   include: {
     //     tiktoks: true,

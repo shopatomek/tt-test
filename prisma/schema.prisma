@@ -25,7 +25,7 @@ model User {
 }
 
 model tiktok {
-  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
   tiktokId      String?
   authorId      String?
   createTime    Int?
@@ -36,10 +36,11 @@ model tiktok {
   followerCount Int?
   heartCount    Int?
   videoCount    String?
-  description   String? @map("itdescription")
+  description   String?  @map("itdescription")
   tags          String?
-  user          User    @relation(fields: [userEmail], references: [email])
-  userEmail     String
+  user          User?    @relation(fields: [creator], references: [id])
+  creator       String?  @db.ObjectId
+  createdAt     DateTime @default(now())
 }
 
 model Account {

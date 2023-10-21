@@ -15,44 +15,18 @@ import { Dice1 } from "lucide-react";
 const SignInButton = () => {
   const { data: session, status } = useSession();
 
-  // const handleSendData = async () => {
-  //   try {
-  //     const response = await fetch("/api/route", {
-  //       method: "POST",
-  //       // @ts-ignore
-  //       headers: {
-  //         "Content-Type": "json",
-  //         "Session-Token": session,
-  //       },
-  //       body: JSON.stringify({ sessionToken: session }),
-  //     });
-
-  //     const responseData = await response.json();
-  //     console.log(responseData);
-  //   } catch (error) {
-  //     console.error("Wystąpił błąd podczas wysyłania danych:", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   if (status === "authenticated") {
-  //     handleSendData();
-  //   }
-  // }, [status]);
-
   const currentDate = new Date();
   const formattedDate = format(currentDate, "yyyy-MM-dd HH:mm:ss");
 
-  const userEmail = session?.user?.email;
-
-  // if (status === "loading") {
-  //   return <p>Hang on there...</p>;
-  // }
+  if (status === "loading") {
+    return <p>Hang on there...</p>;
+  }
 
   if (status === "authenticated") {
     return (
       <div className="container ml-auto">
         <p className="text-sm flex-row text-neutral-700">
-          Signed as {userEmail} at {formattedDate}
+          Signed as {session.user.name} at {formattedDate}
         </p>
         <div className="flex float-right py-3">
           <Image
