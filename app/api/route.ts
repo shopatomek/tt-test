@@ -1,28 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const content = require("@/lib/datatosend");
+import { Profile } from "next-auth";
 
 // @ts-ignore
 
 export async function GET(request) {
-  let email = "Brak e-maila";
-
-  try {
-    // Zakładam, że wiesz, jakie ID użytkownika chcesz uzyskać.
-    // Jeśli nie wiesz, musisz dostosować zapytanie do swoich potrzeb.
-
-    const name = await prisma.user.findUnique({
-      where: {
-        email: user.email,
-      },
-    });
-
-    if (name) {
-      const email = user.email;
-    }
-  } catch (error) {
-    console.error("Nie można pobrać e-maila użytkownika", error);
-  }
+  let email = Profile;
 
   return new Response(JSON.stringify({ message: email }), {
     status: 200,

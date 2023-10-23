@@ -6,6 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 const prisma = new PrismaClient();
 
 const handler = NextAuth({
+  debug: true,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
@@ -36,7 +37,7 @@ const handler = NextAuth({
           },
         });
       }
-
+      console.log(user);
       return user;
     },
   },
