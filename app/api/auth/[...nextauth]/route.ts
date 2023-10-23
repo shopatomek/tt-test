@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
-
+import OAuthProfile from "next-auth";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 const prisma = new PrismaClient();
 
-const handler = NextAuth({
+export const handler = NextAuth({
   debug: true,
   providers: [
     GoogleProvider({
@@ -14,7 +14,7 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user, account, profile, email, credentials }) {
       const existingUser = await prisma.user.findUnique({
         where: { email: user.email },
       });
@@ -37,10 +37,21 @@ const handler = NextAuth({
           },
         });
       }
-      console.log(user);
+
       return user;
     },
   },
 });
 
 export { handler as GET, handler as POST };
+
+// https://next-auth.js.org/configuration/callbacks
+export const data = OAuthProfile({
+  profile: (profile: any) => {
+    return {
+      id: profile.sub,
+      name: profile.name,
+      email: profile.email,
+    };
+  },
+});

@@ -1,13 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const content = require("@/lib/datatosend");
-import { Profile } from "next-auth";
 
-// @ts-ignore
+
 
 export async function GET(request) {
-  let email = Profile;
-
+  const email = "email";
   return new Response(JSON.stringify({ message: email }), {
     status: 200,
     headers: {
