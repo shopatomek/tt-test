@@ -1,18 +1,17 @@
 import { PrismaClient } from "@prisma/client";
+
 const prisma = new PrismaClient();
 const content = require("@/lib/datatosend");
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
 
-
-
-export async function GET(request) {
-  const email = "email";
-  return new Response(JSON.stringify({ message: email }), {
-    status: 200,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+export async function GET() {
+  const session = await getServerSession(authOptions);
+  return NextResponse.json({ name: session?.user?.name });
 }
+
+//www.youtube.com/watch?v=md65iBX5Gxg
 
 export async function POST(request: Request) {
   try {

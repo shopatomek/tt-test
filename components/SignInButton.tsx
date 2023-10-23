@@ -53,7 +53,9 @@ const SignInButton = () => {
         <DataBaseTable columns={columns} data={data} />
       </div>
     );
-  } else if (status === "unauthenticated") {
+  } 
+  
+  if (status === "unauthenticated") {
     return (
       <div className="flex flex-col items-center justify-center text-center">
         <div className="relative">
