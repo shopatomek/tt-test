@@ -1,17 +1,28 @@
 import { PrismaClient } from "@prisma/client";
-
 const prisma = new PrismaClient();
 const content = require("@/lib/datatosend");
 
 // @ts-ignore
 
 export async function GET(request) {
-  // Zakładając, że Twoja aplikacja działa na localhost:3000
-  const response = await fetch("http://localhost:3000/api/auth/session");
-  const data = await response.json();
+  let email = "Brak e-maila";
 
-  // Teraz możesz użyć wartości e-mail z odpowiedzi
-  const email = data.email || "Brak e-maila";
+  try {
+    // Zakładam, że wiesz, jakie ID użytkownika chcesz uzyskać.
+    // Jeśli nie wiesz, musisz dostosować zapytanie do swoich potrzeb.
+
+    const name = await prisma.user.findUnique({
+      where: {
+        email: user.email,
+      },
+    });
+
+    if (name) {
+      const email = user.email;
+    }
+  } catch (error) {
+    console.error("Nie można pobrać e-maila użytkownika", error);
+  }
 
   return new Response(JSON.stringify({ message: email }), {
     status: 200,
