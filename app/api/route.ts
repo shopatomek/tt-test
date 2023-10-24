@@ -3,12 +3,21 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const content = require("@/lib/datatosend");
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
+import getCurrentUsers from "../../lib/getCurrentUsers";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const session = await getServerSession(authOptions);
-  return NextResponse.json({ name: session?.user?.name });
+  const userData = await getCurrentUsers();
+
+  if (userData?.email) {
+    // Jeśli email istnieje w danych użytkownika, zwróć go jako odpowiedź JSON
+    return NextResponse.json({ email: userData.email });
+  } else {
+    // Jeśli nie ma danych użytkownika lub brak emaila, zwróć odpowiedni komunikat
+    return NextResponse.json({
+      message: "Brak dostępnych danych użytkownika lub emaila",
+    });
+  }
 }
 
 //www.youtube.com/watch?v=md65iBX5Gxg

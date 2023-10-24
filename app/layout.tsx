@@ -26,6 +26,7 @@ export default async function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Providers>
             <SessionProvider session={session}>
+              {/* {children} */}
               <Appbar />
             </SessionProvider>
           </Providers>
