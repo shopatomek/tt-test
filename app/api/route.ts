@@ -6,18 +6,27 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import getCurrentUsers from "../../lib/getCurrentUsers";
 import { NextResponse } from "next/server";
 
+// export async function GET() {
+//   const userData = await getCurrentUsers();
+
+//   if (userData?.email) {
+//     // Jeśli email istnieje w danych użytkownika, zwróć go jako odpowiedź JSON
+//     return NextResponse.json({ email: userData.email });
+//   } else {
+//     // Jeśli nie ma danych użytkownika lub brak emaila, zwróć odpowiedni komunikat
+//     return NextResponse.json({
+//       message: "Brak dostępnych danych użytkownika lub emaila",
+//     });
+//   }
+// }
 export async function GET() {
   const userData = await getCurrentUsers();
 
-  if (userData?.email) {
-    // Jeśli email istnieje w danych użytkownika, zwróć go jako odpowiedź JSON
+  if (userData?.email)
+    // Pobierz dane zewnętrzne za pomocą fetch
+
+    // Zwróć email z danych użytkownika i dane zewnętrzne
     return NextResponse.json({ email: userData.email });
-  } else {
-    // Jeśli nie ma danych użytkownika lub brak emaila, zwróć odpowiedni komunikat
-    return NextResponse.json({
-      message: "Brak dostępnych danych użytkownika lub emaila",
-    });
-  }
 }
 
 //www.youtube.com/watch?v=md65iBX5Gxg
